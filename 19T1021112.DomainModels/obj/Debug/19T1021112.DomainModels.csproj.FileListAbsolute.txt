@@ -1,0 +1,5 @@
+D:\LTWed_Nhom3\Test\19T1021112\19T1021112\19T1021112.DomainModels\bin\Debug\19T1021112.DomainModels.dll
+D:\LTWed_Nhom3\Test\19T1021112\19T1021112\19T1021112.DomainModels\bin\Debug\19T1021112.DomainModels.pdb
+D:\LTWed_Nhom3\Test\19T1021112\19T1021112\19T1021112.DomainModels\obj\Debug\19T1021112.DomainModels.csproj.CoreCompileInputs.cache
+D:\LTWed_Nhom3\Test\19T1021112\19T1021112\19T1021112.DomainModels\obj\Debug\19T1021112.DomainModels.dll
+D:\LTWed_Nhom3\Test\19T1021112\19T1021112\19T1021112.DomainModels\obj\Debug\19T1021112.DomainModels.pdb
