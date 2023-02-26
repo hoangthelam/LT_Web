@@ -3,32 +3,35 @@
     Layout = null;
 }
 
-<p style="margin-top:10px;">
-    Có <strong>@Model.RowCount</strong> nhân viên trong tổng số <strong>@Model.PageCount</strong> trang.
+
+<p style="margin-top: 10px;">
+    Có <strong>@Model.RowCount</strong> Nhân viên trong tổng số <strong>@Model.PageCount</strong> trang
 </p>
 
 <div class="table-responsive">
-    <table class="table table-bordered table-striped table-hover">
+    <table style="margin-bottom:0;" class="table table-bordered table-striped table-hover">
         <thead>
-            <tr>
+            <tr class="bg-primary">
                 <th>Ảnh</th>
                 <th>Họ đệm</th>
-                <th>Tên nhân viên</th>
+                <th>Tên</th>
                 <th>Ngày sinh</th>
+                <th>Ghi chú</th>
                 <th>Email</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Data)
+            @foreach (var item in @Model.Data)
             {
                 <tr>
-                    <td><img src="@item.Photo" class="user-image" alt="User Image" width="50px"></td>
+                    <td><img src="@item.Photo" class="media-object" style="width:60px"></td>
                     <td>@item.FirstName</td>
                     <td>@item.LastName</td>
                     <td>@item.BirthDate</td>
+                    <td>@item.Notes</td>
                     <td>@item.Email</td>
-                    <td>
+                    <td class="text-right">
                         <a href="~/Employee/Edit/@item.EmployeeID" class="btn btn-xs btn-primary">
                             <i class="fa fa-edit"></i>
                         </a>
@@ -38,23 +41,27 @@
                     </td>
                 </tr>
             }
-
         </tbody>
     </table>
 
-    <div class="text-center">
-        <ul class="pagination">
-            @for (int i = 1; i <= Model.PageCount; i++)
-            {
-                if (i == Model.Page)
-                {
-                    <li class="active"><a href="#">@i</a></li>
-                }
-                else
-                {
-                    <li><a href="~/Employee?page=@i&searchValue=@Model.SearchValue">@i</a></li>
-                }
-            }
-        </ul>
-    </div>
 </div>
+
+
+@* Phân trang *@
+<div class="text-center">
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            if (i == Model.Page)
+            {
+                <li class="active"><a href="#">@i</a></li>
+            }
+            else
+            {
+                <li><a href="javascript:;" onclick="doSearch(@i)">@i</a></li>
+            }
+        }
+
+    </ul>
+</div>
+

@@ -20,3 +20,14 @@ C:\Users\hoang\source\repos\LTWeb\19T1021112.BusinessLayers\obj\Debug\19T1021112
 C:\Users\hoang\source\repos\LTWeb\19T1021112.BusinessLayers\obj\Debug\19T1021112.BusinessLayers.csproj.CopyComplete
 C:\Users\hoang\source\repos\LTWeb\19T1021112.BusinessLayers\obj\Debug\19T1021112.BusinessLayers.dll
 C:\Users\hoang\source\repos\LTWeb\19T1021112.BusinessLayers\obj\Debug\19T1021112.BusinessLayers.pdb
+C:\Users\hoang\source\repos\19T1021112\19T1021112.BusinessLayers\bin\Debug\19T1021112.BusinessLayers.dll
+C:\Users\hoang\source\repos\19T1021112\19T1021112.BusinessLayers\bin\Debug\19T1021112.BusinessLayers.pdb
+C:\Users\hoang\source\repos\19T1021112\19T1021112.BusinessLayers\bin\Debug\19T1021112.DataLayers.dll
+C:\Users\hoang\source\repos\19T1021112\19T1021112.BusinessLayers\bin\Debug\19T1021112.DomainModels.dll
+C:\Users\hoang\source\repos\19T1021112\19T1021112.BusinessLayers\bin\Debug\19T1021112.DataLayers.pdb
+C:\Users\hoang\source\repos\19T1021112\19T1021112.BusinessLayers\bin\Debug\19T1021112.DomainModels.pdb
+C:\Users\hoang\source\repos\19T1021112\19T1021112.BusinessLayers\obj\Debug\19T1021112.BusinessLayers.csproj.AssemblyReference.cache
+C:\Users\hoang\source\repos\19T1021112\19T1021112.BusinessLayers\obj\Debug\19T1021112.BusinessLayers.csproj.CoreCompileInputs.cache
+C:\Users\hoang\source\repos\19T1021112\19T1021112.BusinessLayers\obj\Debug\19T1021112.BusinessLayers.csproj.CopyComplete
+C:\Users\hoang\source\repos\19T1021112\19T1021112.BusinessLayers\obj\Debug\19T1021112.BusinessLayers.dll
+C:\Users\hoang\source\repos\19T1021112\19T1021112.BusinessLayers\obj\Debug\19T1021112.BusinessLayers.pdb

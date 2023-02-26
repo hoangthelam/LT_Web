@@ -116,6 +116,26 @@ namespace _19T1021112.Web.Controllers
         [HttpPost] // chỉ nhận phương thức post
         public ActionResult Save(Supplier data) // supplier data tương đương với int SupplierID, string SupplierName, ...
         {
+            ///Kiểm Soát dữ liệu đầu vào
+
+            if (string.IsNullOrWhiteSpace(data.SupplierName))
+                ModelState.AddModelError(nameof(data.SupplierName), "Tên Không được để trống");
+            if(string.IsNullOrWhiteSpace(data.ContactName))
+                ModelState.AddModelError(nameof(data.ContactName), "Tên giao dịch không được để trống");
+            if (string.IsNullOrWhiteSpace(data.Country))
+                ModelState.AddModelError(nameof(data.Country), "Vui lòng chọn quốc gia");
+
+            data.Address = data.Address ?? "";
+            data.Phone = data.Phone ?? "";
+            data.City = data.City ?? "";
+            data.PostalCode = data.PostalCode ?? "";
+
+            if(ModelState.IsValid == false)
+            {
+                ViewBag.Title = data.SupplierID == 0 ? "Bổ sung nhà cung cấp" : "Cập nhật nhà cung cấp";
+                return View("Edit",data);
+            }
+
             if (data.SupplierID == 0)
             {
                 CommonDataService.AddSupplier(data);

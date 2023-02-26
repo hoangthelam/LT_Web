@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using _19T1021112.BusinessLayers;
 using _19T1021112.DomainModels;
+using System.Reflection;
 
 namespace _19T1021112.Web.Controllers
 {
@@ -12,124 +13,133 @@ namespace _19T1021112.Web.Controllers
     {
         private const int PAGE_SIZE = 5;
         private const string CUSTOMER_SEARCH = "CustomerCondition";
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        //public ActionResult Index(int page = 1, string searchValue = "")
-        //{
-        //    int rowCount = 0;
-        //    var data = CommonDataService.ListOfCategories(page, PAGE_SIZE, searchValue, out rowCount);
-        //    int pageCount = rowCount / PAGE_SIZE;
-        //    if (rowCount % PAGE_SIZE > 0)
-        //    {
-        //        pageCount += 1;
-        //    }
-        //    ViewBag.Page = page;
-        //    ViewBag.RowCount = rowCount;
-        //    ViewBag.PageCount = pageCount;
-        //    ViewBag.SearchValue = searchValue;
-
-        //    return View(data);
-        //}
-
+        // GET: Customer
         public ActionResult Index()
         {
             Models.PaginationSearchInput condition = Session[CUSTOMER_SEARCH] as Models.PaginationSearchInput;
+
             if (condition == null)
             {
                 condition = new Models.PaginationSearchInput()
                 {
                     Page = 1,
                     PageSize = PAGE_SIZE,
-                    SearchValue = ""
+                    SearchValue = "",
                 };
             }
-
             return View(condition);
         }
 
-        public ActionResult Search(Models.PaginationSearchInput condition)
+        public ActionResult Search(Models.PaginationSearchInput condition)  // (int Page, int PageSize, string SearchValue)
         {
             int rowCount = 0;
             var data = CommonDataService.ListOfCustomers(condition.Page,
-                                                          condition.PageSize,
-                                                          condition.SearchValue,
-                                                          out rowCount);
+                                                        condition.PageSize,
+                                                        condition.SearchValue,
+                                                        out rowCount);
             Models.CustomerSearchOutput result = new Models.CustomerSearchOutput()
             {
                 Page = condition.Page,
                 PageSize = condition.PageSize,
                 SearchValue = condition.SearchValue,
+                RowCount = rowCount,
                 Data = data,
-                RowCount = rowCount
             };
+
             Session[CUSTOMER_SEARCH] = condition;
 
             return View(result);
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        [ValidateAntiForgeryToken] // kiểm tra những cái k hợp lệ từ bên ngoài
-        [HttpPost] // chỉ nhận phương thức post
-        public ActionResult Save(Customer data)
-        {
-            if (data.CustomerID == 0)
-                CommonDataService.AddCustomer(data);
-            else
-                CommonDataService.UpdateCustomer(data);
-
-            return RedirectToAction("Index");
-        }
-
-        /// <summary>
-        /// 
+        /// Thêm Khách hàng
         /// </summary>
         /// <returns></returns>
         public ActionResult Create()
         {
-            var data = new Customer() { CustomerID = 0 };
+            var data = new Customer()
+            {
+                CustomerID = 0,
+            };
 
-            ViewBag.Title = "Bổ sung khách hàng";
+            ViewBag.Title = "Thêm Khách hàng";
             return View("Edit", data);
         }
         /// <summary>
-        /// 
+        /// Sửa Khách hàng
         /// </summary>
         /// <returns></returns>
         public ActionResult Edit(int id = 0)
         {
             if (id <= 0)
                 return RedirectToAction("Index");
+
             var data = CommonDataService.GetCustomer(id);
             if (data == null)
                 return RedirectToAction("Index");
 
-            ViewBag.Title = "Cập nhật khách hàng";
+            ViewBag.Title = "Sửa Khách hàng";
             return View(data);
         }
+
+        // Attribute
+        [ValidateAntiForgeryToken]  // Kiểm tra Token không hợp lệ
+        [HttpPost]  // Chỉ nhận phương thức post
+        public ActionResult Save(Customer data)
+        {
+            // Kiểm soát dữ liệu đầu vào
+            if (string.IsNullOrWhiteSpace(data.CustomerName))
+                ModelState.AddModelError(nameof(data.CustomerName), "Tên không được để trống!");
+            if (string.IsNullOrWhiteSpace(data.ContactName))
+                ModelState.AddModelError(nameof(data.ContactName), "Tên liên lạc không được để trống!");
+            if (string.IsNullOrWhiteSpace(data.Country))
+                ModelState.AddModelError(nameof(data.Country), "Quốc gia không được để trống!");
+            if (string.IsNullOrWhiteSpace(data.City))
+                ModelState.AddModelError(nameof(data.City), "Thành phố không được để trống!");
+            if (string.IsNullOrWhiteSpace(data.PostalCode))
+                ModelState.AddModelError(nameof(data.PostalCode), "Mã bưu chính không được để trống!");
+
+            data.Address = data.Address ?? "";
+            data.Email = data.Email ?? "";
+
+            if (ModelState.IsValid == false)    // Kiểm tra dữ liệu đầu vào có hợp lệ hay không
+            {
+                ViewBag.Title = data.CustomerID == 0 ? "Bổ sung Khách hàng" : "Cập nhật Khách hàng";
+                return View("Edit", data);
+            }
+
+            //
+            if (data.CustomerID == 0)
+            {
+                CommonDataService.AddCustomer(data);
+            }
+            else
+            {
+                CommonDataService.UpdateCustomer(data);
+            }
+            return RedirectToAction("Index");
+        }
+
         /// <summary>
-        /// 
+        /// Xóa Khách hàng
         /// </summary>
         /// <returns></returns>
         public ActionResult Delete(int id = 0)
         {
             if (id <= 0)
                 return RedirectToAction("Index");
+
             if (Request.HttpMethod == "POST")
             {
                 CommonDataService.DeleteCustomer(id);
                 return RedirectToAction("Index");
             }
+
             var data = CommonDataService.GetCustomer(id);
             if (data == null)
                 return RedirectToAction("Index");
 
-            ViewBag.Title = "Xóa khách hàng";
+            ViewBag.Title = "Xóa Khách hàng";
             return View(data);
         }
     }

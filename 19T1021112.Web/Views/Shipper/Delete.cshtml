@@ -1,23 +1,25 @@
-﻿@{
-
+﻿@model _19T1021112.DomainModels.Shipper
+@{
+    ViewBag.Title = "Xóa Nhà cung cấp";
 }
 
 <div class="box box-danger">
     <div class="box-body">
-        <form class="form-horizontal" action="">
+        <form class="form-horizontal" action="~/Shipper/Delete/@Model.ShipperID" method="post">
             <div class="form-group">
                 <label class="control-label col-sm-2">Tên người giao hàng:</label>
                 <div class="col-sm-10">
-                    <p class="form-control-static">Speedy Express</p>
+                    <p class="form-control-static">@Model.ShipperName</p>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="control-label col-sm-2">Số điện thoại:</label>
+                <label class="control-label col-sm-2">Điện thoại:</label>
                 <div class="col-sm-10">
-                    <p class="form-control-static">(503) 555-9831</p>
+                    <p class="form-control-static">@Model.Phone</p>
                 </div>
             </div>
+
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
@@ -34,3 +36,4 @@
         </form>
     </div>
 </div>
+
