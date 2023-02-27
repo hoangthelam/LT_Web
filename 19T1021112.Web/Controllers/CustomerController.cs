@@ -9,6 +9,7 @@ using System.Reflection;
 
 namespace _19T1021112.Web.Controllers
 {
+    [Authorize]
     public class CustomerController : Controller
     {
         private const int PAGE_SIZE = 5;

@@ -3,3 +3,9 @@ D:\LTWed_Nhom3\Test\19T1021112\19T1021112\19T1021112.DomainModels\bin\Debug\19T1
 D:\LTWed_Nhom3\Test\19T1021112\19T1021112\19T1021112.DomainModels\obj\Debug\19T1021112.DomainModels.csproj.CoreCompileInputs.cache
 D:\LTWed_Nhom3\Test\19T1021112\19T1021112\19T1021112.DomainModels\obj\Debug\19T1021112.DomainModels.dll
 D:\LTWed_Nhom3\Test\19T1021112\19T1021112\19T1021112.DomainModels\obj\Debug\19T1021112.DomainModels.pdb
+C:\Users\hoang\source\repos\19T1021112\19T1021112.DomainModels\bin\Debug\19T1021112.DomainModels.dll
+C:\Users\hoang\source\repos\19T1021112\19T1021112.DomainModels\bin\Debug\19T1021112.DomainModels.pdb
+C:\Users\hoang\source\repos\19T1021112\19T1021112.DomainModels\obj\Debug\19T1021112.DomainModels.csproj.AssemblyReference.cache
+C:\Users\hoang\source\repos\19T1021112\19T1021112.DomainModels\obj\Debug\19T1021112.DomainModels.csproj.CoreCompileInputs.cache
+C:\Users\hoang\source\repos\19T1021112\19T1021112.DomainModels\obj\Debug\19T1021112.DomainModels.dll
+C:\Users\hoang\source\repos\19T1021112\19T1021112.DomainModels\obj\Debug\19T1021112.DomainModels.pdb

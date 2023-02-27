@@ -9,6 +9,7 @@ using _19T1021112.DomainModels;
 
 namespace _19T1021112.Web.Controllers
 {
+    [Authorize]
     public class SupplierController : Controller
     {
         private const int PAGE_SIZE = 5;
