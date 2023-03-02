@@ -1,8 +1,8 @@
-﻿using _19T1021112.DataLayers.SQLServer;
-using _19T1021112.DataLayers;
-using _19T1021112.DomainModels;
+﻿using _19T1021112.DomainModels;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,9 +54,9 @@ namespace _19T1021112.DataLayers.SQLServer
                             UserName = Convert.ToString(dbReader["Email"]),
                             FullName = $"{dbReader["FirstName"]} {dbReader["LastName"]}",
                             Email = Convert.ToString(dbReader["Email"]),
-                            Photo = Convert.ToString(dbReader["Photo"]),
                             RoleName = "",
-                            Password = ""
+                            Password = "",
+                            Photo = Convert.ToString(dbReader["Photo"]),
                         };
                     }
                     dbReader.Close();
@@ -75,7 +75,29 @@ namespace _19T1021112.DataLayers.SQLServer
         /// <returns></returns>
         public bool ChangePassword(string userName, string oldPassword, string newPassword)
         {
-            throw new NotImplementedException();
+            if (Authorize(userName, oldPassword) != null)
+            {
+                bool result = false;
+                using (SqlConnection cn = OpenConnection())
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.CommandText = @"UPDATE Employees
+                                        SET Password = @Password
+                                        WHERE Email = @Email";
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = cn;
+                    cmd.Parameters.AddWithValue("@Password", newPassword);
+                    cmd.Parameters.AddWithValue("@Email", userName);
+
+                    result = cmd.ExecuteNonQuery() > 0;
+
+                    cn.Close();
+                }
+                return result;
+            }
+
+            return false;
+
         }
     }
 }

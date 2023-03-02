@@ -6521,8 +6521,12 @@
     <Content Include="Views\Customer\Search.cshtml" />
     <Content Include="Views\Employee\Search.cshtml" />
     <Content Include="Views\Shipper\Search.cshtml" />
-    <Content Include="Views\Account\Logout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\Delete.cshtml" />
+    <Content Include="Views\Product\Photo.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

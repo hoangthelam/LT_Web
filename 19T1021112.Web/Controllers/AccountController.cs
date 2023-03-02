@@ -1,4 +1,5 @@
 ﻿using _19T1021112.BusinessLayers;
+using _19T1021112.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,5 +66,57 @@ namespace _19T1021112.Web.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");
         }
+
+        //Đổi mật khẩu
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Save(UserAccount data, string newPassword, string confirmNewPassword)
+        {
+            // Kiểm soát dữ liệu đầu vào
+            if (string.IsNullOrWhiteSpace(data.Password))
+                ModelState.AddModelError(nameof(data.Password), "Trường bắt buộc!");
+            if (string.IsNullOrWhiteSpace(newPassword))
+                ModelState.AddModelError(nameof(newPassword), "Trường bắt buộc!");
+            if (string.IsNullOrWhiteSpace(confirmNewPassword))
+                ModelState.AddModelError(nameof(confirmNewPassword), "Trường bắt buộc!");
+            if (!newPassword.Equals(confirmNewPassword))
+                ModelState.AddModelError(nameof(confirmNewPassword), "Mật khẩu xác nhận và Mật khẩu mới không trùng khớp!");
+
+            if (ModelState.IsValid == false)    // Kiểm tra dữ liệu đầu vào có hợp lệ hay không
+            {
+                ModelState.AddModelError("", "Thay đổi thông tin thất bại!");
+                return View("Index", data);
+            }
+
+            // Đổi mật khẩu
+            var useAccount = UserAccountService.ChangePassword(AccountTypes.Employee, data.UserName, data.Password, newPassword);
+
+            if (!useAccount)
+            {
+                ModelState.AddModelError("", "Thay đổi thông tin thất bại!");
+                return View("Index", data);
+            }
+            else
+            {
+                ModelState.AddModelError("", "Cập nhật thông tin thành công!");
+            }
+
+            // Chuyển chuỗi thông tin đăng nhập thành json
+            string cookieString = Newtonsoft.Json.JsonConvert.SerializeObject(new UserAccount
+            {
+                UserID = data.UserID,
+                UserName = data.UserName,
+                Photo = data.Photo,
+                FullName = data.FullName,
+                Email = data.Email,
+                RoleName = data.RoleName,
+                Password = newPassword
+            });
+            // Ghi cookie cho phiên đăng nhập
+            FormsAuthentication.SetAuthCookie(cookieString, false);
+
+            return View("Index", data);
+        }
+
     }
 }
