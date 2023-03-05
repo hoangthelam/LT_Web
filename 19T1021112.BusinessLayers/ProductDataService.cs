@@ -1,15 +1,13 @@
-﻿using System;
+﻿using _19T1021112.DataLayers;
+using _19T1021112.DomainModels;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using _19T1021112.DataLayers;
-using _19T1021112.DomainModels;
-using System.Configuration;
-using _19T1021112.DomainModel;
-using _19T1021112.DataLayer;
 
-namespace _19T1021112.BusinessLayer
+namespace _19T1021112.BusinessLayers
 {
     /// <summary>
     /// Các nghiệp vụ quản lý hàng hóa
@@ -24,7 +22,7 @@ namespace _19T1021112.BusinessLayer
         static ProductDataService()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
-            productDB = new DataLayer.SQLServer.ProductDAL(connectionString);
+            productDB = new DataLayers.SQLServer.ProductDAL(connectionString);
         }
 
 

@@ -127,6 +127,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ShipperController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
@@ -138,6 +139,8 @@
     <Compile Include="Models\EmployeeSearchOutput.cs" />
     <Compile Include="Models\PaginationSearchInput.cs" />
     <Compile Include="Models\PaginationSearchOutput.cs" />
+    <Compile Include="Models\ProductSearchInput.cs" />
+    <Compile Include="Models\ProductSearchOutput.cs" />
     <Compile Include="Models\ShipperSearchOutput.cs" />
     <Compile Include="Models\SupplierSearchOutput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -6527,6 +6530,14 @@
     <Content Include="Views\Product\Delete.cshtml" />
     <Content Include="Views\Product\Photo.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Product\Search.cshtml" />
+    <Content Include="Views\Product\Attribute.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\Details.cshtml" />
+    <Content Include="Views\Order\EditDetail.cshtml" />
+    <Content Include="Views\Order\Create .cshtml" />
+    <Content Include="Views\Order\SearchProducts.cshtml" />
+    <Content Include="Views\Order\Shipping.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

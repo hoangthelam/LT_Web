@@ -1,4 +1,4 @@
-﻿
+﻿@model _19T1021112.DomainModels.Product
 @{
     ViewBag.Title = "Bổ sung mặt hàng";
 }
@@ -8,60 +8,60 @@
     </div>
 
     <div class="box-body">
-        <form class="form-horizontal" action="#" method="post">
+        <form class="form-horizontal" action="~/Product/Save" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="ProductID" value="@Model.ProductID" />
+
             <div class="form-group">
                 <label class="control-label col-sm-2">Tên mặt hàng:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="ProductName" autofocus>
+                    <input type="text" class="form-control" name="ProductName" value="@Model.ProductName" autofocus>
+                    @Html.ValidationMessageFor(m => m.ProductName, "", new { @style = "color:#f00" })
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2">Loại hàng:</label>
                 <div class="col-sm-10">
-                    <select class="form-control" name="categoryID">
-                        <option>-- Loại hàng --</option>
-                        <option>Mỹ phẩm</option>
-                        <option>Thực phẩm</option>
-                    </select>
+                    @Html.DropDownListFor(m => m.CategoryID, SelectListHelper.Categories(), new { @class = "form-control" })
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2">Nhà cung cấp:</label>
                 <div class="col-sm-10">
-                    <select class="form-control" name="supplierID">
-                        <option>-- Nhà cung cấp --</option>
-                        <option>Công ty TNHH Thành Công</option>
-                        <option>Vina Foods</option>
-                    </select>
+                    @Html.DropDownListFor(m => m.SupplierID, SelectListHelper.Suppliers(), new { @class = "form-control" })
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2">Đơn vị tính:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="Unit" autofocus>
+                    <input type="text" class="form-control" name="Unit" value="@Model.Unit">
+                    @Html.ValidationMessageFor(m => m.Unit, "", new { @style = "color:#f00" })
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2">Giá hàng:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="Price">
+                    <input type="text" class="form-control" name="Price" value="@Model.Price">
+                    @Html.ValidationMessageFor(m => m.Price, "", new { @style = "color:#f00" })
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2">Ảnh minh họa:</label>
                 <div class="col-sm-10">
-                    <input type="file" class="form-control" name="Photo" />
+                    <input type="hidden" name="Photo" value="@Model.Photo" />
+                    <input type="file" class="form-control" name="uploadPhoto" accept="image/*" onchange="document.getElementById('Photo').src = window.URL.createObjectURL(this.files[0])" />
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-lg-offset-2 col-sm-10">
-                    <img src="~/Images/Products/samsung_NP900X4C.png" class="img img-bordered" style="width:200px" />
+                    <input type="hidden" name="Photo" value="@Model.Photo" />
+                    <img id="Photo" src="~/@Model.Photo" class="img img-bordered" style="width:200px;" />
                 </div>
             </div>
 

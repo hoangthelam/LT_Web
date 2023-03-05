@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using _19T1021112.DomainModel;
+using _19T1021112.DomainModels;
 
 
-namespace _19T1021112.DataLayer
+namespace _19T1021112.DataLayers
 {
     /// <summary>
     /// Định nghĩa các phép xử lý dữ liệu liên quan đến mặt hàng

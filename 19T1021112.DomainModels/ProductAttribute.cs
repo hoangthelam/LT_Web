@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _19T1021112.DomainModel
+namespace _19T1021112.DomainModels
 {
     /// <summary>
     /// Thuộc tính của mặt hàng
