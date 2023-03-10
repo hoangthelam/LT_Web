@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
-using _19T1021112.DataLayer;
+using _19T1021112.DataLayers;
 using _19T1021112.DomainModels;
 
-namespace _19T1021112.BusinessLayer
+namespace _19T1021112.BusinessLayers
 {
     /// <summary>
     /// Các chức năng nghiệp vụ liên quan đến xử lý đơn hàng
@@ -21,7 +21,7 @@ namespace _19T1021112.BusinessLayer
         static OrderService()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
-            //orderDB = new DataLayer.SQLServer.OrderDAL(connectionString);
+            orderDB = new DataLayers.SQLServer.OrderDAL(connectionString);
         }
         /// <summary>
         /// 
@@ -83,6 +83,8 @@ namespace _19T1021112.BusinessLayer
 
             //TODO: Kiểm tra xem việc hủy bỏ đơn hàng có hợp lý đối với trạng thái hiện tại của đơn hàng hay không?
             //... Your code here ...
+            if (data.Status != OrderStatus.INIT)
+                return false;
 
             data.Status = OrderStatus.CANCEL;
             data.FinishedTime = DateTime.Now;
@@ -101,6 +103,8 @@ namespace _19T1021112.BusinessLayer
 
             //TODO: Kiểm tra xem việc từ chối đơn hàng có hợp lý đối với trạng thái hiện tại của đơn hàng hay không?
             //... Your code here ...
+            if (data.Status != OrderStatus.INIT)
+                return false;
 
             data.Status = OrderStatus.REJECTED;
             data.FinishedTime = DateTime.Now;
@@ -119,6 +123,8 @@ namespace _19T1021112.BusinessLayer
 
             //TODO: Kiểm tra xem việc chấp nhận đơn hàng có hợp lý đối với trạng thái hiện tại của đơn hàng hay không?
             //... Your code here ...
+            if (data.Status != OrderStatus.INIT)
+                return false;
 
             data.Status = OrderStatus.ACCEPTED;
             data.AcceptTime = DateTime.Now;
@@ -138,11 +144,14 @@ namespace _19T1021112.BusinessLayer
 
             //TODO: Kiểm tra xem việc xác nhận đã chuyển hàng có hợp lý đối với trạng thái hiện tại của đơn hàng hay không?
             //... Your code here ...
-
-            data.Status = OrderStatus.SHIPPING;
-            data.ShipperID = shipperID;
-            data.ShippedTime = DateTime.Now;
-            return orderDB.Update(data);
+            if (data.Status == OrderStatus.ACCEPTED)
+            {
+                data.Status = OrderStatus.SHIPPING;
+                data.ShipperID = shipperID;
+                data.ShippedTime = DateTime.Now;
+                return orderDB.Update(data);
+            }
+            return false;
         }
         /// <summary>
         /// Ghi nhận kết thúc quá trình xử lý đơn hàng thành công
@@ -157,10 +166,13 @@ namespace _19T1021112.BusinessLayer
 
             //TODO: Kiểm tra xem việc ghi nhận đơn hàng kết thúc thành công có hợp lý đối với trạng thái hiện tại của đơn hàng hay không?
             //... Your code here ...
-
-            data.Status = OrderStatus.FINISHED;
-            data.FinishedTime = DateTime.Now;
-            return orderDB.Update(data);
+            if (data.Status == OrderStatus.SHIPPING)
+            {
+                data.Status = OrderStatus.FINISHED;
+                data.FinishedTime = DateTime.Now;
+                return orderDB.Update(data);
+            }
+            return false;
         }
         /// <summary>
         /// Xóa đơn hàng và toàn bộ chi tiết của đơn hàng
@@ -223,5 +235,11 @@ namespace _19T1021112.BusinessLayer
         {
             return orderDB.DeleteDetail(orderID, productID);
         }
+
+        public static List<StatusOrder> ListOfStatus()
+        {
+            return orderDB.ListOfStatus().ToList();
+        }
+
     }
 }

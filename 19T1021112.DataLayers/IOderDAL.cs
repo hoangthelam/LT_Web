@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using _19T1021112.DomainModels;
 
 
-namespace _19T1021112.DataLayer
+namespace _19T1021112.DataLayers
 {
     /// <summary>
     /// Định nghĩa các phép xử lý dữ liệu liên quan đến đơn hàng
@@ -83,5 +83,10 @@ namespace _19T1021112.DataLayer
         /// <param name="productID"></param>
         /// <returns></returns>
         bool DeleteDetail(int orderID, int productID);
+        /// <summary>
+        /// Lấy danh sách trạng thái đơn hàng
+        /// </summary>
+        /// <returns></returns>
+        IList<StatusOrder> ListOfStatus();
     }
 }

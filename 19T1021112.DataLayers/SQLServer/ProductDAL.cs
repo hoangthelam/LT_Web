@@ -1,5 +1,5 @@
-﻿using _19T1021112.DataLayers;
-using _19T1021112.DataLayers.SQLServer;
+﻿using _19T1021112.DataLayers.SQLServer;
+using _19T1021112.DataLayers;
 using _19T1021112.DomainModels;
 using System;
 using System.Collections.Generic;

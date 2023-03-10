@@ -13,7 +13,7 @@
             <input type="hidden" name="ProductID" value="@item.ProductID" />
             <input type="hidden" name="ProductName" value="@item.ProductName" />
             <input type="hidden" name="Unit" value="@item.Unit" />
-            <input type="hidden" name="Photo" value="~/Image/Products/@item.Photo" />
+            <input type="hidden" name="Photo" value="~/@item.Photo" />
 
             <div class="row">
                 <div class="col-md-12">
@@ -22,7 +22,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-3">
-                    <img class="img img-responsive img-bordered" src="~/Images/Products/@item.Photo">
+                    <img class="img img-responsive img-bordered" src="~/@item.Photo">
                 </div>
                 <div class="col-sm-9">
                     <div class="form-group-sm">
@@ -52,4 +52,3 @@
     <li class="previous"><a href="javascript:;" onclick="doSearch(@previousPage)"><i class="fa fa-backward"></i></a></li>
     <li class="next"><a href="javascript:;" onclick="doSearch(@nextPage)"><i class="fa fa-forward"></i></a></li>
 </ul>
-
